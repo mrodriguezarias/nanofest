@@ -1,0 +1,453 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1e1e1e;
+  color: HotPink;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@font-face {
+  font-family: "Grobold";
+  src: url("font.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+header {
+  border-bottom: 3px dashed HotPink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+header h1 {
+  font-size: 32px;
+  text-align: center;
+  font-family: "Grobold";
+  display: inline-flex;
+  cursor: pointer;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.spacer {
+  margin-left: 10px;
+}
+
+.red {
+  color: Crimson;
+}
+
+.orange {
+  color: Coral;
+}
+
+.yellow {
+  color: Gold;
+}
+
+.green {
+  color: MediumSeaGreen;
+}
+
+.blue {
+  color: CornflowerBlue;
+}
+
+.purple {
+  color: MediumOrchid;
+}
+
+.red-bg {
+  color: #3c163b;
+  background-color: Crimson;
+}
+
+.orange-bg {
+  color: #3c163b;
+  background-color: Coral;
+}
+
+.yellow-bg {
+  color: #3c163b;
+  background-color: Gold;
+}
+
+.green-bg {
+  color: #3c163b;
+  background-color: MediumSeaGreen;
+}
+
+.blue-bg {
+  color: #3c163b;
+  background-color: CornflowerBlue;
+}
+
+.purple-bg {
+  color: #3c163b;
+  background-color: MediumOrchid;
+}
+
+#admin {
+  padding: 1em 1.5em;
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  flex-direction: column;
+  height: calc(100% - 100px);
+}
+
+#admin h1,
+#admin h2 {
+  display: inline-flex;
+  font-family: "Grobold";
+}
+
+#admin h1 {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+#admin h2 {
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+#admin label {
+  font-size: 18px;
+  font-family: "Grobold";
+}
+
+#admin .inputContainer {
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-row-gap: 15px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+#admin .inputContainer label {
+  display: table-cell;
+  text-align: right;
+  margin-top: 1em;
+}
+
+#admin textarea {
+  display: table-cell;
+  background-color: #1e1e1e;
+  color: HotPink;
+  margin-left: 15px;
+  font-size: 24px;
+  font-family: "Grobold";
+  border: 1px dotted HotPink;
+  resize: none;
+  border-radius: 10px;
+  padding: 10px;
+  line-height: 1.3em;
+  overflow: hidden;
+}
+
+#admin textarea:focus {
+  outline: none;
+  color: SkyBlue;
+}
+
+.clicker {
+  cursor: pointer;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.mini.button {
+  margin-top: 5px;
+}
+
+#admin h1.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+#admin .teamBoardContainer {
+  border: 2px dotted HotPink;
+  padding: 1em;
+  border-radius: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.teamBoard {
+  display: flex;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.teamBoard .team {
+  flex: 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.teamBoard h1 {
+  font-size: 50px;
+}
+
+.teamBoard .score {
+  font-size: 70px;
+  font-family: "Grobold";
+  margin: 25px 0;
+}
+
+.teamBoard .buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.teamBoard .buttons > .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 150px;
+  font-size: 50px;
+  border: 5px dashed #3c163b;
+  width: 60px;
+  height: 60px;
+  font-family: "Grobold";
+}
+
+.teamBoard .buttons > .button span {
+  margin-top: 5px;
+}
+
+.teamBoard .buttons > .button:hover {
+  border-color: #892986;
+  color: #892986;
+}
+
+.teamBoard .buttons > .button:first-of-type {
+  font-size: 70px;
+}
+
+#welcome {
+  font-family: "Grobold";
+  font-size: 24px;
+  margin: 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 100px);
+}
+
+#welcome a {
+  text-decoration: underline;
+}
+
+#welcome .step {
+  border: 2px dotted hotpink;
+  border-radius: 15px;
+  padding: 1em;
+  margin: 0.5em 0;
+}
+
+#welcome .step:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#welcome .stepNumber {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1em;
+  border: 1px solid hotpink;
+  border-radius: 100px;
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+}
+
+#welcome .teamBoard {
+  margin-top: 20px;
+}
+
+#welcome .teamBoard .team {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#welcome .teamBoard .team .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80%;
+}
+
+#welcome .teamBoard .team .members {
+  margin-left: -10px;
+}
+
+#welcome .teamBoard h1 {
+  margin: 0;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#welcome .teamBoard .members h3 {
+  margin: 3px 0;
+}
+
+.emoji {
+  font-size: 1.3em;
+}
+
+footer {
+  display: flex;
+  justify-content: stretch;
+  height: 40%;
+  border-top: 3px dashed HotPink;
+  padding: 1em 0 1em 1em;
+}
+
+footer > div {
+  flex: 1 0;
+  border-radius: 15px;
+  border: 2px dotted HotPink;
+  margin-right: 1em;
+  padding: 1em;
+  text-align: center;
+}
+
+footer .info {
+  display: flex;
+  flex-direction: column;
+  font-family: "Grobold";
+  font-size: 20px;
+}
+
+footer .info p {
+  margin: 10px 0;
+}
+
+footer .board > div {
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+footer .board .team {
+  flex: 1 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1em;
+  font-family: "Grobold";
+}
+
+#game {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 70px);
+}
+
+#game .content {
+  flex: 1;
+}
+
+#admin .controls {
+  display: flex;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+#admin .controls > section {
+  border: 2px dotted HotPink;
+  flex: 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  border-radius: 15px;
+  margin-left: 15px;
+}
+
+#admin .controls > section:first-of-type {
+  margin-left: 0;
+}
+
+#admin .controls > section button {
+  margin-top: 10px;
+  width: 100%;
+}
+
+button {
+  background-color: #ff69b4;
+  border-radius: 28px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 17px;
+  padding: 14px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 2px #9a1a5a;
+  outline: none;
+  font-family: "Grobold";
+}
+button:hover {
+  background-color: #fb56a8;
+}
+button:active {
+  position: relative;
+  top: 1px;
+}
+button:disabled {
+  background-color: #ffb8dc;
+  cursor: default;
+}
+
+.statusContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(100, 40, 70, 0.6);
+  text-align: center;
+  padding-top: 100px;
+  font-family: "Grobold";
+}

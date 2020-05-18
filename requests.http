@@ -1,0 +1,44 @@
+GET http://localhost:3750/api/team
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9,es-AR;q=0.8,es-419;q=0.7,es;q=0.6
+Authorization: WLhXpo26aIFhxJ3UZP77CTEzX5pP64CN
+Content-Type: application/json
+
+###
+
+POST http://localhost:3750/api/team/
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9,es-AR;q=0.8,es-419;q=0.7,es;q=0.6
+Authorization: WLhXpo26aIFhxJ3UZP77CTEzX5pP64CN
+Content-Type: application/json
+
+{
+  "name": "Red",
+  "color": "red",
+  "order": 1,
+  "members": ["a", "b", "c"]
+}
+
+###
+
+PUT http://localhost:3750/api/team/?name=Red
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9,es-AR;q=0.8,es-419;q=0.7,es;q=0.6
+Authorization: WLhXpo26aIFhxJ3UZP77CTEzX5pP64CN
+Content-Type: application/json
+
+{
+  "name": "Redo"
+}
+
+###
+
+DELETE http://localhost:3750/api/team/?_id=5ec047e10553922a462bd12a
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9,es-AR;q=0.8,es-419;q=0.7,es;q=0.6
+Authorization: WLhXpo26aIFhxJ3UZP77CTEzX5pP64CN
+Content-Type: application/json
