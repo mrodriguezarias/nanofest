@@ -523,7 +523,7 @@ button:active {
   position: relative;
   top: 1px;
 }
-button:disabled {
+#admin button:disabled {
   background-color: #ffb8dc;
   cursor: default;
 }
