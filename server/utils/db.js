@@ -2,10 +2,12 @@ import { objectUtils } from "./"
 
 const dbUtils = {
   find: async (Model, filters = {}) => {
+    filters = objectUtils.replaceKey(filters, "id", "_id")
     const res = await Model.find(filters)
     return res.map((r) => objectUtils.replaceKey(r.toObject(), "_id", "id"))
   },
   findOne: async (Model, filters = {}) => {
+    filters = objectUtils.replaceKey(filters, "id", "_id")
     const res = await Model.findOne(filters)
     return res ? objectUtils.replaceKey(res.toObject(), "_id", "id") : null
   },

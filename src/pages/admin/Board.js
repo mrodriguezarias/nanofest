@@ -1,29 +1,36 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { gameActions } from "../../core/game"
 import { teamActions } from "../../core/team"
 import { boardActions } from "../../core/board"
 
 const Board = ({ onBack }) => {
   const teams = useSelector((state) => state.teams.all)
+  const games = useSelector((state) => state.games.all)
   const board = useSelector((state) => state.board)
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(gameActions.fetchGames(games))
     dispatch(teamActions.fetchTeams(teams))
     dispatch(boardActions.fetchBoard(board))
-  }, [dispatch, teams, board])
+  }, [dispatch, games, teams, board])
 
   const updateScore = (id, score) => {
-    dispatch(teamActions.updateScore(id, score))
-  }
-
-  const resetScores = () => {
-    dispatch(teamActions.resetScores())
+    if (board.status === "playing") {
+      dispatch(teamActions.updateScore(id, score))
+    }
   }
 
   const resetEverything = () => {
-    resetScores()
-    updateBoard({ status: "waiting", game: null, team: null, card: null })
+    dispatch(teamActions.resetScores())
+    updateBoard({
+      status: "waiting",
+      game: null,
+      team: null,
+      card: null,
+      show: null,
+    })
   }
 
   const updateBoard = (data) => {
@@ -81,6 +88,35 @@ const Board = ({ onBack }) => {
     }
   }
 
+  const toggleShow = (what) => {
+    const show = board.show === what ? null : what
+    updateBoard({ show })
+  }
+
+  const game = games.find((game) => game.id === board.game) || {}
+  const team = teams.find((team) => team.id === board.team) || {}
+
+  const handleNextGame = () => {
+    const curGameIndex = games.findIndex((game) => game.id === board.game)
+    const nextGameIndex = (curGameIndex + 1) % games.length
+    updateBoard({ game: games[nextGameIndex].id, show: null })
+  }
+
+  const handleNextTeam = () => {
+    let team = board.team
+    if (board.mode === "turns") {
+      const curTeamIndex = teams.findIndex((team) => team.id === board.team)
+      const nextTeamIndex = (curTeamIndex + 1) % teams.length
+      team = teams[nextTeamIndex].id
+    } else {
+      team = null
+    }
+    const curCardIndex = game.cards.findIndex((card) => card._id === board.card)
+    const nextCardIndex = (curCardIndex + 1) % game.cards.length
+    const card = game.cards[nextCardIndex]._id
+    updateBoard({ team, card, show: null })
+  }
+
   return (
     <>
       <h1 className="title">
@@ -95,7 +131,7 @@ const Board = ({ onBack }) => {
             disabled={!["waiting", "playing"].includes(board.status)}
             onClick={handleStartFinish}
           >
-            {board.status === "playing" ? "Finalizar" : "Comenzar"}
+            {board.status === "waiting" ? "Comenzar" : "Finalizar"}
           </button>
           <button
             disabled={!["playing", "paused"].includes(board.status)}
@@ -103,29 +139,61 @@ const Board = ({ onBack }) => {
           >
             {board.status === "paused" ? "Resumir" : "Pausar"}
           </button>
+          <button
+            disabled={board.status === "waiting"}
+            onClick={resetEverything}
+          >
+            Reinicializar
+          </button>
         </section>
         <section>
-          <h2>Juego {board.game}</h2>
-          <button disabled={board.status !== "playing"}>
+          <h2>Juego {game.name}</h2>
+          <button
+            onClick={handleNextGame}
+            disabled={board.status !== "playing"}
+          >
             Avanzar al siguiente
           </button>
         </section>
         <section>
-          <h2>Equipo {board.team}</h2>
-          <button disabled={!board.game}>Avanzar al siguiente</button>
+          <h2>Tarjetas</h2>
+          <button
+            onClick={handleNextTeam}
+            disabled={!(board.game && board.status === "playing")}
+          >
+            Avanzar a la siguiente
+          </button>
         </section>
         <section>
           <h2>Modo {getDisplayableMode()}</h2>
-          <button onClick={handleChangeMode}>
+          <button
+            onClick={handleChangeMode}
+            disabled={board.status === "waiting"}
+          >
             Pasar a{" "}
             {getDisplayableMode(board.mode === "pulses" ? "turns" : "pulses")}
           </button>
         </section>
         <section>
-          <h2>Reinicializar</h2>
-          <button>Cuenta regresiva</button>
-          <button onClick={resetScores}>Puntajes</button>
-          <button onClick={resetEverything}>Partida</button>
+          <h2>Turno</h2>
+          <button
+            onClick={() => toggleShow("answer")}
+            disabled={board.status === "waiting"}
+          >
+            Mostrar respuesta
+          </button>
+          <button
+            onClick={() => toggleShow("options")}
+            disabled={board.status === "waiting"}
+          >
+            Mostrar opciones
+          </button>
+          <button
+            onClick={() => dispatch(boardActions.resetCounter())}
+            disabled={board.status === "waiting"}
+          >
+            Reiniciar contador
+          </button>
         </section>
       </div>
       <div className="teamBoardContainer">

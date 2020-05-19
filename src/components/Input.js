@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react"
 import { typeUtils } from "../utils"
 
-const Input = ({ name, initialValue, onSubmit }) => {
+const Input = ({ name, initialValue, onSubmit, type = null }) => {
   const [value, setValue] = useState("")
   const inputRef = useRef()
 
@@ -28,7 +28,7 @@ const Input = ({ name, initialValue, onSubmit }) => {
   }
 
   const castOutput = (value) => {
-    switch (typeUtils.typeOf(initialValue)) {
+    switch (type || typeUtils.typeOf(initialValue)) {
       case "array":
         return value.split("\n")
       case "number":
@@ -47,7 +47,6 @@ const Input = ({ name, initialValue, onSubmit }) => {
 
   const handleKeyUp = (event) => {
     if (event.key === "Escape") {
-      console.log("escape key")
       setValue(castInput(initialValue))
       shouldSubmit = false
       inputRef.current.blur()

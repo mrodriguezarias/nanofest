@@ -1,13 +1,14 @@
 import React from "react"
 import { Header, Footer } from "../../components"
 import Status from "./Status"
+import GameArea from "./GameArea"
 
 const Game = () => {
   return (
     <>
       <Header />
       <div id="game">
-        <div className="content"></div>
+        <GameArea />
         <Footer />
       </div>
       <Status />

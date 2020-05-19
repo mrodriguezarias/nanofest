@@ -2,15 +2,19 @@ import React, { useState, useEffect } from "react"
 import { Input } from "../../components"
 import { useDispatch, useSelector } from "react-redux"
 import { gameActions } from "../../core/game"
+import { Cards } from "./Cards"
 
 const Games = ({ onBack }) => {
   const [name, setName] = useState()
   const [rules, setRules] = useState()
   const [time, setTime] = useState()
   const [order, setOrder] = useState()
+  const [cards, setCards] = useState()
   const [creating, setCreating] = useState(false)
+  const [cardSection, setCardSection] = useState(false)
   const games = useSelector((state) => state.games.all)
   const editing = useSelector((state) => state.games.editing)
+  const editingCard = useSelector((state) => state.games.editingCard)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -18,15 +22,16 @@ const Games = ({ onBack }) => {
   }, [dispatch, games])
 
   useEffect(() => {
-    const { name, rules, time, order } =
+    const { name, rules, time, order, cards } =
       games.find((game) => game.id === editing) || {}
     setName(name)
     setRules(rules)
     setTime(time)
     setOrder(order)
+    setCards(cards)
   }, [editing, games])
 
-  const handleUpdate = async (data) => {
+  const handleUpdate = (data) => {
     const currentGame = games.find((game) => game.id === editing) || {}
     const { id, name, rules, time, order } = {
       ...currentGame,
@@ -40,9 +45,35 @@ const Games = ({ onBack }) => {
     }
   }
 
+  const updateCard = (gameId, card) => {
+    dispatch(gameActions.updateCard(gameId, card))
+  }
+
+  const deleteCard = (gameId, card) => {
+    dispatch(gameActions.deleteCard(gameId, card))
+  }
+
+  const editCard = (card) => {
+    dispatch(gameActions.editCard(card))
+  }
+
   const handleBack = () => {
     dispatch(gameActions.editGame(null))
     setCreating(false)
+  }
+
+  if (cardSection) {
+    return (
+      <Cards
+        onBack={() => setCardSection(false)}
+        game={{ id: editing, name, cards }}
+        cards={cards}
+        editingCard={editingCard}
+        updateCard={updateCard}
+        deleteCard={deleteCard}
+        editCard={editCard}
+      />
+    )
   }
 
   return creating || editing ? (
@@ -60,6 +91,11 @@ const Games = ({ onBack }) => {
           </label>
         )}
       </h1>
+      <h2>
+        <span onClick={() => setCardSection(true)} className="clicker">
+          Tarjetas
+        </span>
+      </h2>
       <div className="inputContainer">
         <Input
           name="Nombre"

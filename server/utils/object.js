@@ -7,6 +7,9 @@ const objectUtils = {
     delete Object.assign(objCopy, { [newName]: objCopy[name] })[name]
     return objCopy
   },
+  isEmpty: (obj) => {
+    return Object.keys(obj).length === 0
+  },
 }
 
 export { objectUtils }

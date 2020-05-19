@@ -14,6 +14,7 @@ const fetchBoard = async (connection, { cached }) => {
       card: null,
       status: "waiting",
       mode: "turns",
+      show: null,
     }
     board = await dbUtils.create(Board, defaultBoard)
   }
@@ -24,17 +25,26 @@ const fetchBoard = async (connection, { cached }) => {
 
 const updateBoard = async (
   connection,
-  { board: { game, team, status, mode } },
+  { board: { game, team, status, mode, card, show } },
 ) => {
-  const board = await dbUtils.updateOne(Board, {}, { game, team, status, mode })
+  const board = await dbUtils.updateOne(
+    Board,
+    {},
+    { game, team, status, mode, card, show },
+  )
   socketUtils.emitActionToEveryone(connection, actionTypes.CL_UPDATE_BOARD, {
     board,
   })
 }
 
+const resetCounter = (connection) => {
+  socketUtils.emitActionToEveryone(connection, actionTypes.CL_RESET_COUNTER)
+}
+
 const boardSocketHandlers = {
   SV_FETCH_BOARD: fetchBoard,
   SV_UPDATE_BOARD: updateBoard,
+  SV_RESET_COUNTER: resetCounter,
 }
 
 export { boardSocketHandlers }

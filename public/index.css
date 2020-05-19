@@ -351,12 +351,71 @@ footer > div {
 footer .info {
   display: flex;
   flex-direction: column;
+  align-items: center;
   font-family: "Grobold";
   font-size: 20px;
 }
 
+footer .info h2 {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
 footer .info p {
   margin: 10px 0;
+}
+
+footer .info1 {
+  margin-top: -5px;
+  display: flex;
+  flex-direction: column;
+  height: 65%;
+  justify-content: center;
+  align-items: center;
+}
+
+footer .info2 {
+  width: 70%;
+  height: 35%;
+  display: flex;
+  justify-content: space-evenly;
+  width: calc(100% - 100px);
+}
+
+footer .info2 section {
+  width: 130px;
+  border: 1px dotted HotPink;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+footer .info2 .pulse button {
+  display: inline-flex;
+  padding: 10px 14px;
+}
+
+footer .info2 .pulse button:hover {
+  background-color: default;
+}
+
+footer .info2 h3 {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer .info2 h4 {
+  margin: 0;
+  margin-top: 16px;
+  height: 50px;
+}
+
+footer .info2 .pulse h4 {
+  height: 33px;
 }
 
 footer .board > div {
@@ -374,6 +433,11 @@ footer .board .team {
   align-items: center;
   padding: 0 1em;
   font-family: "Grobold";
+  font-size: 20px;
+}
+
+footer .board .team .members {
+  font-size: 16px;
 }
 
 #game {
@@ -383,7 +447,32 @@ footer .board .team {
 }
 
 #game .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   flex: 1;
+  font-family: "Grobold";
+  text-align: center;
+  padding: 20px;
+}
+
+#game .content h1 {
+  width: calc(100% - 150px);
+  font-size: 42px;
+  margin-top: 30px;
+  border: 2px dotted HotPink;
+  border-radius: 15px;
+  padding: 20px;
+  padding-bottom: 16px;
+  line-height: 1.2;
+}
+
+#game .content div {
+  border: 2px dotted HotPink;
+  border-radius: 15px;
+  width: fit-content;
+  min-width: 200px;
+  padding: 0 10px;
 }
 
 #admin .controls {
@@ -427,7 +516,7 @@ button {
   outline: none;
   font-family: "Grobold";
 }
-button:hover {
+#admin button:hover {
   background-color: #fb56a8;
 }
 button:active {
@@ -450,4 +539,15 @@ button:disabled {
   text-align: center;
   padding-top: 100px;
   font-family: "Grobold";
+}
+
+.truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#admin .cards {
+  padding-bottom: 10px;
 }

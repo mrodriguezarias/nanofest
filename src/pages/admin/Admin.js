@@ -5,7 +5,7 @@ import Games from "./Games"
 import Board from "./Board"
 
 const Admin = () => {
-  const [section, setSection] = useState("board")
+  const [section, setSection] = useState(null)
 
   const renderSection = () => {
     switch (section) {

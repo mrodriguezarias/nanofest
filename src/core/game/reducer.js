@@ -5,6 +5,7 @@ const initialState = {
   all: [],
   current: null,
   editing: null,
+  editingCard: {},
 }
 
 const fetchGames = (state, { games }) => {
@@ -18,10 +19,14 @@ const createGame = (state, { game }) => {
   return { ...state, all: allSorted, editing: game.id }
 }
 
-const updateGame = (state, { game }) => {
+const updateGame = (state, { game, card }) => {
   const all = state.all.map((cur) => (cur.id === game.id ? game : cur))
   const allSorted = arrayUtils.sortByKey(all, "order")
-  return { ...state, all: allSorted }
+  return {
+    ...state,
+    all: allSorted,
+    ...(card !== undefined && { editingCard: card }),
+  }
 }
 
 const deleteGame = (state, { id }) => {
@@ -41,6 +46,8 @@ const gameReducer = (state = initialState, action) => {
       return updateGame(state, action.payload)
     case gameActions.CL_DELETE_GAME:
       return deleteGame(state, action.payload)
+    case gameActions.EDIT_CARD:
+      return { ...state, editingCard: action.payload.card }
     default:
       return state
   }

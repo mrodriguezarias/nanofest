@@ -6,6 +6,7 @@ const boardSchema = new Schema({
   card: String,
   status: String, // one of ("waiting", "playing", "paused", "ended")
   mode: String, // one of ("turns", "pulses")
+  show: String,
 })
 
 const Board = model("Board", boardSchema)

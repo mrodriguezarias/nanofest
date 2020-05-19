@@ -1,5 +1,6 @@
 const gameActions = {
   EDIT_GAME: "EDIT_GAME",
+  EDIT_CARD: "EDIT_CARD",
   CL_FETCH_GAMES: "CL_FETCH_GAMES",
   CL_CREATE_GAME: "CL_CREATE_GAME",
   CL_UPDATE_GAME: "CL_UPDATE_GAME",
@@ -8,6 +9,8 @@ const gameActions = {
   SV_CREATE_GAME: "SV_CREATE_GAME",
   SV_UPDATE_GAME: "SV_UPDATE_GAME",
   SV_DELETE_GAME: "SV_DELETE_GAME",
+  SV_UPDATE_CARD: "SV_UPDATE_CARD",
+  SV_DELETE_CARD: "SV_DELETE_CARD",
   editGame: (id) => ({
     type: gameActions.EDIT_GAME,
     payload: { id },
@@ -27,6 +30,18 @@ const gameActions = {
   deleteGame: (id) => ({
     type: gameActions.SV_DELETE_GAME,
     payload: { id },
+  }),
+  editCard: (card) => ({
+    type: gameActions.EDIT_CARD,
+    payload: { card },
+  }),
+  updateCard: (gameId, card) => ({
+    type: gameActions.SV_UPDATE_CARD,
+    payload: { gameId, card },
+  }),
+  deleteCard: (gameId, card) => ({
+    type: gameActions.SV_DELETE_CARD,
+    payload: { gameId, card },
   }),
 }
 
