@@ -30,7 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start": "nodemon --watch server --require reify ./server"
+    "start": "NODE_ENV=development nodemon --watch server --require reify ./server",
+    "start:prod": "NODE_ENV=production node --require reify ./server"
   },
   "eslintConfig": {
     "extends": "react-app"
